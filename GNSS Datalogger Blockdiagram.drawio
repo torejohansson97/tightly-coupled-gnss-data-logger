@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-27T11:23:19.356Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="UdCXKbimZVYQuy84gSdu" version="20.3.6" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-09-27T11:23:52.825Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="QW5-lgpaxY4IErY5UNUp" version="20.3.6" type="github" pages="3">
   <diagram id="QYVSEmqz1Xe53FgVcWaA" name="Blockdiagram">
     <mxGraphModel dx="1209" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -215,7 +215,7 @@
             <mxPoint x="924.4285714285716" y="1080" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="goGHhM1kMBDF1f29i5A8-40" value="DATA LOGGER" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="goGHhM1kMBDF1f29i5A8-40" value="Data gathering tool" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="610" y="890" width="630" height="90" as="geometry" />
         </mxCell>
         <mxCell id="goGHhM1kMBDF1f29i5A8-41" value="&lt;font style=&quot;font-size: 44px;&quot;&gt;?&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
