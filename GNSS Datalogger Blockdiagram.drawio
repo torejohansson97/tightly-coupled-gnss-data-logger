@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-27T11:39:49.722Z" agent="5.0 (X11)" etag="ktUM6jOrVQ9qHlP2uHrx" version="20.3.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-09-27T11:41:12.610Z" agent="5.0 (X11)" etag="hkqZFCu_Zow8Wtjo2hfb" version="20.3.7" type="github" pages="4">
   <diagram id="QYVSEmqz1Xe53FgVcWaA" name="Blockdiagram">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -304,7 +304,7 @@
             <mxPoint x="410" y="400.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="WNVyaroSZho34jVkrItC-1" value="Bit-twiddler" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="WNVyaroSZho34jVkrItC-1" value="Bit-twiddler" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeWidth=25;" vertex="1" parent="1">
           <mxGeometry x="160" y="320" width="70" height="100" as="geometry" />
         </mxCell>
       </root>
