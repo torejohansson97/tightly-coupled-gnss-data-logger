@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-27T11:38:16.913Z" agent="5.0 (X11)" etag="7H8e0d68fbc-EDGl4bW2" version="20.3.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-09-27T11:39:05.527Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Safari/605.1.15" etag="jiFT-FErLeoJ4k0WH-tm" version="20.3.6" type="github" pages="4">
   <diagram id="QYVSEmqz1Xe53FgVcWaA" name="Blockdiagram">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -51,7 +51,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="f508hbFI7pnM3ZHdvNaE" name="VPII">
-    <mxGraphModel dx="1138" dy="634" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -84,9 +84,9 @@
             <mxPoint x="690" y="650" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XMbvgZm5QTNugN4LhLUT-2" value="Ethernet/UDP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="XMbvgZm5QTNugN4LhLUT-1">
+        <mxCell id="XMbvgZm5QTNugN4LhLUT-2" value="Ethernet/UDP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="XMbvgZm5QTNugN4LhLUT-1">
           <mxGeometry x="0.2528" y="2" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="-19" y="2" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="E7MhaNx6dwgs_NyPzzeo-3" value="Raspberry Pi/uC" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -96,7 +96,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="aB4gZ5grOC3IvhDznhnT" name="Radio Circuit">
-    <mxGraphModel dx="1422" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -280,6 +280,29 @@
         </mxCell>
         <mxCell id="goGHhM1kMBDF1f29i5A8-43" value="RF &quot;air to computer interface&quot;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="795" y="640" width="70" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="UCGOpozMqNL13d35zPUT" name="Acquisition Server">
+    <mxGraphModel dx="1306" dy="870" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VX0JuoOEeG7BVGKzYoXF-1" value="&lt;font size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 15px;&quot;&gt;Database&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="410" y="290" width="120" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="VX0JuoOEeG7BVGKzYoXF-2" value="VPII" style="endArrow=classic;html=1;rounded=0;fontSize=15;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="360.5" as="sourcePoint" />
+            <mxPoint x="410" y="360.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VX0JuoOEeG7BVGKzYoXF-3" value="Radio" style="endArrow=classic;html=1;rounded=0;fontSize=15;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="400.5" as="sourcePoint" />
+            <mxPoint x="410" y="400.5" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
