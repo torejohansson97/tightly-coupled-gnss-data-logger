@@ -1,25 +1,38 @@
-<mxfile host="app.diagrams.net" modified="2022-09-18T14:50:41.334Z" agent="5.0 (X11)" etag="-7QWA3tZqvNBBT-ZHshA" version="20.3.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-09-27T11:15:52.016Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="lagbWHCtDluyAqK6k-yo" version="20.3.6" type="github" pages="3">
   <diagram id="QYVSEmqz1Xe53FgVcWaA" name="Blockdiagram">
-    <mxGraphModel dx="1016" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1209" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <UserObject label="Vehicle Position and Information Interface " link="data:page/id,f508hbFI7pnM3ZHdvNaE" id="nnk4DfVSFUegt-mRuhWn-2">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
             <mxGeometry x="243" y="880" width="340" height="80" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="NUR6f2KitnfJjr7ZSmCl-1" value="Acquisition Server" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="NUR6f2KitnfJjr7ZSmCl-1" value="Acquisition Server" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="243" y="760" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="NUR6f2KitnfJjr7ZSmCl-2" value="Scenario Generator" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="NUR6f2KitnfJjr7ZSmCl-2" value="Scenario Generator" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="363" y="760" width="120" height="60" as="geometry" />
         </mxCell>
+        <UserObject label="Radio Circuit" link="data:page/id,aB4gZ5grOC3IvhDznhnT" id="30xhEUEDTNnO7rRw1Q8h-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="300" y="540" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="f508hbFI7pnM3ZHdvNaE" name="VPII">
-    <mxGraphModel dx="1422" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1209" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="aB4gZ5grOC3IvhDznhnT" name="Radio Circuit">
+    <mxGraphModel dx="1209" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
