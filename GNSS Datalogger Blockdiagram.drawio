@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-27T11:30:19.558Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Safari/605.1.15" etag="WQGv76LwqAzWzpasRgQk" version="20.3.6" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-09-27T11:31:38.922Z" agent="5.0 (X11)" etag="l3ANXvwWNvXQ03oV4hkW" version="20.3.2" type="github" pages="3">
   <diagram id="QYVSEmqz1Xe53FgVcWaA" name="Blockdiagram">
-    <mxGraphModel dx="1088" dy="725" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -45,15 +45,46 @@
     </mxGraphModel>
   </diagram>
   <diagram id="f508hbFI7pnM3ZHdvNaE" name="VPII">
-    <mxGraphModel dx="1306" dy="870" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1138" dy="634" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="E7cBt9GhtF8lO3P95sb6-1" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Measurements required&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="297" y="370" width="234" height="90" as="geometry" />
+          <mxGeometry x="50" y="170" width="234" height="90" as="geometry" />
         </mxCell>
         <mxCell id="E7cBt9GhtF8lO3P95sb6-3" value="&lt;pre style=&quot;font-size: 12px; text-align: start;&quot; data-ccp-timestamp=&quot;1664277186470&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Vehicle speed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Acceleration X-axis&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Roll&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Pitch&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Yaw&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Engine RPM&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Acceleration Y-axis&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Acceleration Z-axis&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="300" y="440" width="220" height="200" as="geometry" />
+          <mxGeometry x="590" y="150" width="220" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.895;entryY=0.02;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E7MhaNx6dwgs_NyPzzeo-1" target="E7MhaNx6dwgs_NyPzzeo-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-1" value="Vehicle/OBD2" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="464" y="480" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.108;entryY=0.007;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E7MhaNx6dwgs_NyPzzeo-2" target="E7MhaNx6dwgs_NyPzzeo-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-2" value="IMU" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="284" y="480" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="E7MhaNx6dwgs_NyPzzeo-3" target="E7MhaNx6dwgs_NyPzzeo-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="E7MhaNx6dwgs_NyPzzeo-3" target="E7MhaNx6dwgs_NyPzzeo-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XMbvgZm5QTNugN4LhLUT-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="E7MhaNx6dwgs_NyPzzeo-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XMbvgZm5QTNugN4LhLUT-2" value="Ethernet/UDP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="XMbvgZm5QTNugN4LhLUT-1">
+          <mxGeometry x="0.2528" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E7MhaNx6dwgs_NyPzzeo-3" value="Raspberry Pi/uC" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="274" y="620" width="280" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
