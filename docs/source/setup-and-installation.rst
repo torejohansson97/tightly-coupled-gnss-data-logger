@@ -1,5 +1,11 @@
 .. _intro-set-and-install:
 
+.. toctree::
+   :hidden:
+   :glob:
+
+   setup-and-installation/ros-noetic
+
 ==================
 Setup and Installation guide
 ==================

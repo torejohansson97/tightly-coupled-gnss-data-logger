@@ -2,8 +2,8 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
+project = 'Toughtly Coupled GNSS Data Logger'
+copyright = '2022, Graziella'
 author = 'Graziella'
 
 release = '0.1'

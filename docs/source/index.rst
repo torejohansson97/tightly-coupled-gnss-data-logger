@@ -5,9 +5,6 @@ Toughly Coupled GNSS Data Logger
 
    This project is under active development.
 
-Contents
---------
-
 .. toctree::
    :titlesonly:
    :maxdepth: 1
