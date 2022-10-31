@@ -1,13 +1,5 @@
-Welcome to Lumache's documentation!
+Toughly Coupled GNSS Data Logger
 ===================================
-
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
-
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
 
 .. note::
 
@@ -17,6 +9,15 @@ Contents
 --------
 
 .. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
 
-   usage
-   api
+   Setup and Installation
+
+Getting started
+---------------
+
+* :doc:`Setup and Installation <setup-and-installation>`
+
+  - Instructions for setuping up and configuring the GNSS data logger for the first time
