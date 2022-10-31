@@ -10,7 +10,7 @@ Toughly Coupled GNSS Data Logger
    :maxdepth: 1
    :hidden:
 
-   Setup and Installation
+   setup-and-installation
 
 Getting started
 ---------------
