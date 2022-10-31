@@ -5,6 +5,7 @@
    :glob:
 
    setup-and-installation/ros-noetic
+   setup-and-installation/chrony
 
 ==================
 Setup and Installation guide
