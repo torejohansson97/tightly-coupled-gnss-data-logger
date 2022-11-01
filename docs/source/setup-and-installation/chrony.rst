@@ -14,21 +14,35 @@ To install Chrony on your system, you need to run the following command:
 
     sudo apt install chrony
 
-.. note::
 
-    After installation you will need to either reboot the computer or run the following command:
-    .. code-block:: bash
+After installation you will need to either reboot the computer or run the following command:
 
-        systemctl start chronyd
+.. code-block:: bash
 
-    This will initialize some configuration file that need to be modified
+    systemctl start chronyd
+
+This will initialize some configuration file that need to be modified.
+
+Now in order for the deamon to start automatically at boot, the following command needs to be run:
+
+.. code-block:: bash
+
+    systemctl enable chronyd
 
 Configuration steps
 -------------
 
 Central computer
 ^^^^^^^^^^^^^^^^^^^^^^
-If the computer on which you are installing Chrony is the central computer, paste the following inside the file:
+If the computer on which you are installing Chrony is the central computer, do the following:
+
+1. Open the configuration file with the following command:
+
+.. code-block:: bash
+
+    sudo nano /etc/chrony/chrony.conf
+
+2. Replace the content of the file with the following:
 
 .. code-block:: bash
 
@@ -42,11 +56,20 @@ If the computer on which you are installing Chrony is the central computer, past
 
 .. note::
     Replace 123.456.789.0 with the IP subnet used for communication.
+    The 0 indicates that all IP of the form 123.456.789.XXX are allowed.
 
 Remote node computer
 ^^^^^^^^^^^^^^^^^^^^^^
 
-If the computer on which you are installing Chrony is a remote node, paste this instead
+If the computer on which you are installing Chrony is a remote node, do this instead
+
+1. Open the configuration file with the following command:
+
+.. code-block:: bash
+
+    sudo nano /etc/chrony/chrony.conf
+
+2. Replace the content of the file with the following:
 
 .. code-block:: bash
 
@@ -58,4 +81,4 @@ If the computer on which you are installing Chrony is a remote node, paste this 
 
 .. note::
     Replace 123.456.789.0 with the IP subnet used for communication.
-    The 0 indicates all IP of the form 123.456.789.XXX
+    The 0 indicates that all IP of the form 123.456.789.XXX are allowed.
