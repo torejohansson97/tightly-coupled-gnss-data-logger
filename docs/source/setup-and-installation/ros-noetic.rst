@@ -61,7 +61,7 @@ For an empty worskpace, the command above should show the following output:
 
 .. code-block:: bash
 
-   [build] No packages were found in the source space '/home/master/catkin_ws/src'
+    [build] No packages were found in the source space '/home/master/catkin_ws/src'
     [build] No packages to be built.
     [build] Package table is up to date.                                                                                                                                                                                     
     Starting  >>> catkin_tools_prebuild                                                                                                                                                                                      

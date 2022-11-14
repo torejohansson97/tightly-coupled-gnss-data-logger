@@ -1,0 +1,3 @@
+[submodule "src/gnss-sdr-ros"]
+	path = src/gnss-sdr-ros
+	url = https://github.com/matthew-william-lock/gnss-sdr-ros
