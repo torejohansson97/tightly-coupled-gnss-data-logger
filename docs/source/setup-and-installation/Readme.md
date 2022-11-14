@@ -15,34 +15,34 @@ sudo apt-get install build-essential cmake git pkg-config libboost-dev \
 
 ## General Setup of GNSS-SDR
 
-git clone https://github.com/gnss-sdr/gnss-sdr
-cd gnss-sdr/build
-git checkout next
-cmake ..
-make
-sudo make install
+git clone https://github.com/gnss-sdr/gnss-sdr  
+cd gnss-sdr/build  
+git checkout next  
+cmake ..  
+make  
+sudo make install  
 
-volk_profile
-volk_gnsssdr_profile
+volk_profile  
+volk_gnsssdr_profile  
 
 ## Setup of LimeSDR for GNSS-SDR
 
 # Setup of SoadySDR and limesuite
 
-sudo add-apt-repository -y ppa:myriadrf/drivers
-sudo apt-get update
-sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images
-sudo apt-get install soapysdr soapysdr-module-lms7 
-(or sudo apt-get install soapysdr-tools soapysdr-module-lms7) #have to check not sure yet
+sudo add-apt-repository -y ppa:myriadrf/drivers  
+sudo apt-get update  
+sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images  
+sudo apt-get install soapysdr soapysdr-module-lms7  
+(or sudo apt-get install soapysdr-tools soapysdr-module-lms7) #have to check not sure yet  
 
 # Setup of LimeSDR
 
-sudo apt-get install gr-limesdr
-cd gnss-sdr/build
-git checkout next
-git pull upstream next
-cmake -DENABLE_LIMESDR=ON ..
-make && sudo make install
+sudo apt-get install gr-limesdr  
+cd gnss-sdr/build  
+git checkout next  
+git pull upstream next  
+cmake -DENABLE_LIMESDR=ON ..  
+make && sudo make install  
 
 ## Creation of the configuration file
 
@@ -50,7 +50,7 @@ make && sudo make install
 
 ### How to launch the acquisition
 
-./limesdr with config file
+./limesdr with config file  
 
 
 
