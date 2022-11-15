@@ -1,4 +1,5 @@
 # Setup of GNSS-SDR with LimeSDR on Ubuntu 20.04
+Install of GNSS SDR explained here: https://gnss-sdr.org/build-and-install/
 ## Installations needed
 
 **Installation of the dependencies**
@@ -26,7 +27,7 @@
       $ volk_gnsssdr_profile  
 
 **Setup of LimeSDR for GNSS-SDR**
-
+Installation of LimeSDR and Limesuite explained here : https://wiki.myriadrf.org/Installing_Lime_Suite_on_Linux
 *Setup of SoadySDR and limesuite*
 
       $ cd  
@@ -36,6 +37,7 @@
       $ sudo apt-get install soapysdr-tools soapysdr-module-lms7
 
 *Setup of LimeSDR*
+Installation of LimeSDR for GNSS SDR explained here : https://gnss-sdr.org/docs/sp-blocks/signal-source/#implementation-limesdr_signal_source
 
       $ cd  
       $ sudo apt-get install gr-limesdr  
@@ -49,6 +51,7 @@
 **Setup of the monitoring blocks (PVT monitoring and GNSS Synchro)**
 
 *GNSS Synchro*
+Installation of the monitoring block explained here : https://gnss-sdr.org/docs/sp-blocks/monitor/
 
       $ cd
       $ sudo apt-get install build-essential cmake libboost-dev libboost-system-dev \
@@ -66,6 +69,7 @@
       $ make  
 
 *PVT Monitoring*
+PVT monitoring block explained here :https://github.com/acebrianjuan/gnss-sdr-pvt-monitoring-client
 
       $ cd
       $ git clone https://github.com/acebrianjuan/gnss-sdr-pvt-monitoring-client.git
