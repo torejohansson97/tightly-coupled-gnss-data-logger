@@ -77,10 +77,17 @@
 ## Configuration file for acquisition
 
       $ cd
-      $ wget 
+Create a working directory for GNSS SDR
+
+      $ mkdir work
+      
+Download the configuration file for live acquisition with limesdr
+
+      $ wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/GNSS-SDR/limeSDR.conf
 
 ## How to launch the acquisition
 
-      $ ./limesdr with config file  
+      
+Launch GNSS SDR
 
-
+      $ gnss-sdr --config-file=./<Path to config file>
