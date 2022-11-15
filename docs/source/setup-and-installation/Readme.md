@@ -86,7 +86,7 @@ Create a working directory for GNSS SDR
       
 Download the configuration file for live acquisition with limesdr
 
-      wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/GNSS-SDR/limeSDR.conf
+      wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/GNSS-SDR/limeSDR.conf
       
 Or go to https://gnss-sdr.org/my-first-fix/ to launch GNSS SDR with a raw data file
 
