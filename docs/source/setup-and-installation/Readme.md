@@ -1,5 +1,6 @@
 # Setup of GNSS-SDR with LimeSDR on Ubuntu 20.04
 Install of GNSS SDR explained here: https://gnss-sdr.org/build-and-install/
+
 ## Installations needed
 
 **Installation of the dependencies**
@@ -27,8 +28,8 @@ Install of GNSS SDR explained here: https://gnss-sdr.org/build-and-install/
       $ volk_gnsssdr_profile  
 
 **Setup of LimeSDR for GNSS-SDR**
-Installation of LimeSDR and Limesuite explained here : https://wiki.myriadrf.org/Installing_Lime_Suite_on_Linux
 *Setup of SoadySDR and limesuite*
+Installation of LimeSDR and Limesuite explained here : https://wiki.myriadrf.org/Installing_Lime_Suite_on_Linux
 
       $ cd  
       $ sudo add-apt-repository -y ppa:myriadrf/drivers  
@@ -79,8 +80,6 @@ PVT monitoring block explained here :https://github.com/acebrianjuan/gnss-sdr-pv
 
 
 ## Configuration file for acquisition
-
-      $ cd
 Create a working directory for GNSS SDR
 
       $ mkdir work
@@ -88,6 +87,8 @@ Create a working directory for GNSS SDR
 Download the configuration file for live acquisition with limesdr
 
       $ wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/GNSS-SDR/limeSDR.conf
+      
+Or go to https://gnss-sdr.org/my-first-fix/ to launch GNSS SDR with a raw data file
 
 ## How to launch the acquisition
 
