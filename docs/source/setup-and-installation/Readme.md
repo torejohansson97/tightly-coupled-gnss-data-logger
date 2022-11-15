@@ -59,11 +59,11 @@ Installation of the monitoring block explained here : https://gnss-sdr.org/docs/
        libprotobuf-dev protobuf-compiler libncurses5-dev libncursesw5-dev wget  
        mkdir monitoring-client  
        cd monitoring-client  
-       wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/monitoring-client/gnss_synchro_udp_source.h  
-       wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/monitoring-client/gnss_synchro_udp_source.cc
-       wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/monitoring-client/main.cc
-       wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/monitoring-client/CMakeLists.txt
-       wget https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/monitoring-client/gnss_synchro.proto
+       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/monitoring-client/gnss_synchro_udp_source.h  
+       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/monitoring-client/gnss_synchro_udp_source.cc
+       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/monitoring-client/main.cc
+       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/monitoring-client/CMakeLists.txt
+       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/monitoring-client/gnss_synchro.proto
        mkdir build
        cd build  
        cmake ../  
