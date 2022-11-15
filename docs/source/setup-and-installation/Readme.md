@@ -96,3 +96,15 @@ Or go to https://gnss-sdr.org/my-first-fix/ to launch GNSS SDR with a raw data f
 Launch GNSS SDR
 
       gnss-sdr --config-file=./<Path to config file>
+
+Launch PVT Monitoring -> open new terminal:
+
+      cd 
+      cd gnss-sdr-pvt-monitoring-client/build
+      ./gnss-sdr-pvt-monitoring-client <Port defined in config file (1111 for the one on github>
+
+Launch GNSS Synchro -> open new terminal:
+
+      cd 
+      cd monitoring-client/build
+      ./monitoring-client <Port defined in config file (1234 for the one on github)>
