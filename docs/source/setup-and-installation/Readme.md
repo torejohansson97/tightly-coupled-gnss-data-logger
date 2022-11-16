@@ -100,7 +100,7 @@ Or download the configuration file to replay acquisition with a file of raw data
       wget https://sourceforge.net/projects/gnss-sdr/files/data/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz
       tar -zxvf 2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz
       
-The path to the raw data file is labeled as "SignalSource.filename=" in the configuration file
+The path to the raw data file is labeled as "SignalSource.filename=" in the configuration file. Be careful when you extract the file, the path to the .dat file may be "/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.dat"
 ## How to launch the GNSS SDR
 
       gnss-sdr --config-file=./<Path to config file>
