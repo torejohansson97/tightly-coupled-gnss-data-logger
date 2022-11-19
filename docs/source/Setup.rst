@@ -10,6 +10,7 @@ Setup and Installation guide
 
    Setup/ros-noetic
    Setup/chrony
+   Setup/gnss-sdr
 
 
 Instructions for setuping up and configuring the GNSS data logger for the first time. The orignal hardware setup is described by the table below
