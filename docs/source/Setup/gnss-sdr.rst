@@ -9,7 +9,7 @@ GNSS-SDR with LimeSDR
 
   Keep in mind that the installationg and use of the gnss-sdr with the LimeSDR has only been tested on Ubuntu 20.04 LTS.
 
-## GNSS SDR
+GNSS SDR
 ---------
 
 The full installation procedure of the GNSS SDR explained at `gnss-sdr.org <https://gnss-sdr.org/build-and-install>`_
@@ -36,6 +36,7 @@ Install GNSS-SDR
    sudo make install
 
 Performance Boost 
+^^^^^^^^^
 
 .. note::
 
