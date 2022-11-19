@@ -10,11 +10,11 @@ Toughly Coupled GNSS Data Logger
    :maxdepth: 1
    :hidden:
 
-   setup-and-installation
+   Setup
 
 Getting started
 ---------------
 
-* :doc:`Setup and Installation <setup-and-installation>`
+* :doc:`Setup and Installation <Setup>`
 
   - Instructions for setuping up and configuring the GNSS data logger for the first time

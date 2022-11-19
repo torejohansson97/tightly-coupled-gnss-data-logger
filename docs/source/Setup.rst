@@ -1,15 +1,16 @@
 .. _intro-set-and-install:
 
+
+Setup and Installation guide
+==================
+
 .. toctree::
    :hidden:
    :glob:
 
-   setup-and-installation/ros-noetic
-   setup-and-installation/chrony
+   Setup/ros-noetic
+   Setup/chrony
 
-==================
-Setup and Installation guide
-==================
 
 Instructions for setuping up and configuring the GNSS data logger for the first time. The orignal hardware setup is described by the table below
 
