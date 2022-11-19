@@ -126,41 +126,58 @@ PVT monitoring block explained by : `acebrianjuan <https://github.com/acebrianju
    cmake ../  
    make  
 
-.. warning::
 
-  Please finish documentation below
-
-## Configuration file for acquisition
+Configuration file for acquisition
+---------
 
 Create a working directory for GNSS SDR
+
+.. code-block:: bash
 
       mkdir work
       
 Download the configuration file for live acquisition with limesdr
 
+.. code-block:: bash
+
       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/GNSS-SDR/limeSDR.conf
       
 Or download the configuration file to replay acquisition with a file of raw data
+
+.. code-block:: bash
 
       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/GNSS-SDR/Filedump.conf
       wget https://sourceforge.net/projects/gnss-sdr/files/data/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz
       tar -zxvf 2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz
       
-The path to the raw data file is labeled as "SignalSource.filename=" in the configuration file. Be careful when you extract the file, the path to the .dat file may be "/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.dat"
-## How to launch the GNSS SDR
+.. warning::
+
+      The path to the raw data file is labeled as "SignalSource.filename=" in the configuration file. Be careful when you extract the file, the path to the .dat file         may be "/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.dat"
+
+How to launch the GNSS SDR
+---------
+
+.. code-block:: bash
 
       gnss-sdr --config-file=./<Path to config file>
+
 Or go to https://gnss-sdr.org/my-first-fix/ for more explanation on how to make GNSS SDR work
 
 
-## How to launch PVT Monitoring client
+How to launch PVT Monitoring client
+---------
 
 Open new terminal and go to /gnss-sdr-pvt-monitoring-client/build
 
+.. code-block:: bash
+
       ./gnss-sdr-pvt-monitoring-client <Port defined in config file> (1111 for the one on github)
 
-## How to launch GNSS Synchro monitoring client
+How to launch GNSS Synchro monitoring client
+---------
 
 Open new terminal and go to /monitoring-client/build
+
+.. code-block:: bash
 
       ./monitoring-client <Port defined in config file> (1234 for the one on github)
