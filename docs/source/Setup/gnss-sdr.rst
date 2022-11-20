@@ -142,7 +142,7 @@ Download the configuration file for live acquisition with limesdr
 
       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/GNSS-SDR/limeSDR.conf
       
-Or download the configuration file to replay acquisition with a file of raw data
+Or download the configuration file to replay acquisition with a file of raw data, like explained in here : `gnss-sdr.org <https://gnss-sdr.org/my-first-fix/>`_
 
 .. code-block:: bash
 
