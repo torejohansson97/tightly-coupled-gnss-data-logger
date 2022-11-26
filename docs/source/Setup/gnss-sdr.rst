@@ -133,7 +133,8 @@ Configuration file for acquisition
 Create a working directory for GNSS SDR
 
 .. code-block:: bash
-
+      cd
+      cd gnss-sdr/build
       mkdir work
       
 Download the configuration file for live acquisition with limesdr
@@ -158,10 +159,20 @@ How to launch the GNSS SDR
 ---------
 
 .. code-block:: bash
+      
+      cd
+      cd gnss-sdr
+      gnss-sdr --config-file=./build/work/Name_of_configfile.conf
 
-      gnss-sdr --config-file=./<Path to config file>
+If you want to stream real time data using an antenna and limesdr use the configuration file limeSDR.conf
 
-Or go to https://gnss-sdr.org/my-first-fix/ for more explanation on how to make GNSS SDR work
+If you want to replay data which was already recorded in a file use the configuration file filedump.conf
+
+
+You should see something similar to:
+
+
+If you need more explanation on how to make GNSS SDR work go to https://gnss-sdr.org/my-first-fix/
 
 
 How to launch PVT Monitoring client
@@ -171,7 +182,11 @@ Open new terminal and go to /gnss-sdr-pvt-monitoring-client/build
 
 .. code-block:: bash
 
-      ./gnss-sdr-pvt-monitoring-client <Port defined in config file> (1111 for the one on github)
+      cd
+      cd gnss-sdr-pvt-monitoring-client
+      ./gnss-sdr-pvt-monitoring-client 1111 
+
+1111 being the pvt monitoring port defined in the configuration file
 
 How to launch GNSS Synchro monitoring client
 ---------
@@ -180,4 +195,8 @@ Open new terminal and go to /monitoring-client/build
 
 .. code-block:: bash
 
-      ./monitoring-client <Port defined in config file> (1234 for the one on github)
+      cd
+      cd monitoring-client
+      ./monitoring-client 1234
+      
+1234 being the GNSS Synchro port defined in the configuration file      
