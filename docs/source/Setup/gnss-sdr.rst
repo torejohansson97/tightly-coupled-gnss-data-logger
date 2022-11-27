@@ -171,11 +171,11 @@ If you want to replay data which was already recorded in a file use the configur
 
 You should see something similar to:
 
-.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/2937e80f25a1bf7b78a820c4e9907b6aece7e9fc/Images/startgnsssdr.png
+.. image:: ../../images/startgnsssdr.png
 
 And after a few seconds of detecting the GPS signals you should start getting new navigation messages:
 
-.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/15b4b050b68330af47ee0d58ecc6a7f8e6a843e0/Images/processinggnsssdr.png
+.. image:: ../../images/processinggnsssdr.png
 
 If you need more explanation on how to make GNSS SDR work go to https://gnss-sdr.org/my-first-fix/
 
@@ -195,7 +195,7 @@ Open new terminal and go to /gnss-sdr-pvt-monitoring-client/build
 
 After a few seconds of running the gnss-sdr you should start getting information about the satellites which are detected:
 
-.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/11b1abc59b49ee7a3eacce0bce09eead2b51aa42/Images/gnsssynchro.png
+.. image:: ../../images/gnsssynchro.png
 
 How to launch GNSS Synchro monitoring client
 ---------
@@ -212,4 +212,4 @@ Open new terminal and go to /monitoring-client/build
 
 After a few seconds of running the gnss-sdr you should start getting position fixes which will lead to this kind of data:
 
-.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/11b1abc59b49ee7a3eacce0bce09eead2b51aa42/Images/pvtmonitoring.png
+.. image:: ../../images/pvtmonitoring.png
