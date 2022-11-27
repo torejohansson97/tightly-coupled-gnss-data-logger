@@ -126,41 +126,90 @@ PVT monitoring block explained by : `acebrianjuan <https://github.com/acebrianju
    cmake ../  
    make  
 
-.. warning::
 
-  Please finish documentation below
-
-## Configuration file for acquisition
+Configuration file for acquisition
+---------
 
 Create a working directory for GNSS SDR
 
+.. code-block:: bash
+      cd
+      cd gnss-sdr/build
       mkdir work
       
 Download the configuration file for live acquisition with limesdr
 
+.. code-block:: bash
+
       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/GNSS-SDR/limeSDR.conf
       
-Or download the configuration file to replay acquisition with a file of raw data
+Or download the configuration file to replay acquisition with a file of raw data, like explained in here : `gnss-sdr.org <https://gnss-sdr.org/my-first-fix/>`_
+
+.. code-block:: bash
 
       wget https://raw.githubusercontent.com/torejohansson97/tightly-coupled-gnss-data-logger/main/GNSS-SDR/Filedump.conf
       wget https://sourceforge.net/projects/gnss-sdr/files/data/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz
       tar -zxvf 2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz
       
-The path to the raw data file is labeled as "SignalSource.filename=" in the configuration file. Be careful when you extract the file, the path to the .dat file may be "/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.dat"
-## How to launch the GNSS SDR
+.. warning::
 
-      gnss-sdr --config-file=./<Path to config file>
-Or go to https://gnss-sdr.org/my-first-fix/ for more explanation on how to make GNSS SDR work
+      The path to the raw data file is labeled as "SignalSource.filename=" in the configuration file. Be careful when you extract the file, the path to the .dat file         may be "/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.dat"
+
+How to launch the GNSS SDR
+---------
+
+.. code-block:: bash
+      
+      cd
+      cd gnss-sdr
+      gnss-sdr --config-file=./build/work/Name_of_configfile.conf
+
+If you want to stream real time data using an antenna and limesdr use the configuration file limeSDR.conf
+
+If you want to replay data which was already recorded in a file use the configuration file filedump.conf
 
 
-## How to launch PVT Monitoring client
+You should see something similar to:
+
+.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/2937e80f25a1bf7b78a820c4e9907b6aece7e9fc/Images/startgnsssdr.png
+
+And after a few seconds of detecting the GPS signals you should start getting new navigation messages:
+
+.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/15b4b050b68330af47ee0d58ecc6a7f8e6a843e0/Images/processinggnsssdr.png
+
+If you need more explanation on how to make GNSS SDR work go to https://gnss-sdr.org/my-first-fix/
+
+
+How to launch PVT Monitoring client
+---------
 
 Open new terminal and go to /gnss-sdr-pvt-monitoring-client/build
 
-      ./gnss-sdr-pvt-monitoring-client <Port defined in config file> (1111 for the one on github)
+.. code-block:: bash
 
-## How to launch GNSS Synchro monitoring client
+      cd
+      cd gnss-sdr-pvt-monitoring-client/build
+      ./gnss-sdr-pvt-monitoring-client 1111 
+
+1111 being the pvt monitoring port defined in the configuration file
+
+After a few seconds of running the gnss-sdr you should start getting information about the satellites which are detected:
+
+.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/11b1abc59b49ee7a3eacce0bce09eead2b51aa42/Images/gnsssynchro.png
+
+How to launch GNSS Synchro monitoring client
+---------
 
 Open new terminal and go to /monitoring-client/build
 
-      ./monitoring-client <Port defined in config file> (1234 for the one on github)
+.. code-block:: bash
+
+      cd
+      cd monitoring-client/build
+      ./monitoring-client 1234
+      
+1234 being the GNSS Synchro port defined in the configuration file      
+
+After a few seconds of running the gnss-sdr you should start getting position fixes which will lead to this kind of data:
+
+.. image:: https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/11b1abc59b49ee7a3eacce0bce09eead2b51aa42/Images/pvtmonitoring.png
