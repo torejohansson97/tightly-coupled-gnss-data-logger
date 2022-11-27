@@ -1,3 +1,6 @@
 [submodule "src/gnss-sdr-ros"]
 	path = src/gnss-sdr-ros
 	url = https://github.com/matthew-william-lock/gnss-sdr-ros
+[submodule "src/ublox"]
+	path = src/ublox
+	url = https://github.com/matthew-william-lock/ublox
