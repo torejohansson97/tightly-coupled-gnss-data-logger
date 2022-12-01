@@ -1,4 +1,5 @@
 GNSS_TMUX_SESSION="gnss_sdr"
+ROSBAG_FOLDER="/home/$(whoami)/rosbags"
 
 # Open TMUX session and open appropriate windows
 tmux -2 new-session -d -s $GNSS_TMUX_SESSION -n "ros-core"
@@ -6,6 +7,8 @@ tmux new-window -t $GNSS_TMUX_SESSION:1 -n 'ros-bridge'
 tmux new-window -t $GNSS_TMUX_SESSION:2 -n 'sdr'
 tmux new-window -t $GNSS_TMUX_SESSION:3 -n 'node-synchro'
 tmux new-window -t $GNSS_TMUX_SESSION:4 -n 'node-pvt'
+tmux new-window -t $GNSS_TMUX_SESSION:5 -n 'rosbag'
+tmux new-window -t $GNSS_TMUX_SESSION:6 -n 'control'
 
 # Start roscore in first pane
 # Select pane
@@ -48,11 +51,18 @@ tmux send-keys "source ~/catkin_ws/devel/setup.bash" C-m
 tmux send-keys "cd ~/catkin_ws/src/gnss-sdr-ros/src" C-m
 tmux send-keys "python3 gnss_pvt_udp.py" C-m
 
+# Start ros2 bag in sixth pane
+# Select pane
+tmux select-window -t $GNSS_TMUX_SESSION:5
+# Source ROS2_ws
+tmux send-keys "source ~/ros2_ws/install/setup.bash" C-m
+# Start ros2 bag to record everything in folder ~/rosbags
+tmux send-keys "ros2 bag record -a -o $ROSBAG_FOLDER" C-m
 
 
 # End of script ===============================================================
-# Set default window (ros1)
-tmux select-window -t $GNSS_TMUX_SESSION:1
+# Set default window (control)
+tmux select-window -t $GNSS_TMUX_SESSION:6
 # Attach to session
 tmux -2 attach-session -t $GNSS_TMUX_SESSION
 # =============================================================================
