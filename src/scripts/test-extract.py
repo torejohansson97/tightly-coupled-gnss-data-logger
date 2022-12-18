@@ -143,8 +143,14 @@ with AnyReader([Path(rosbag_dir)]) as reader:
     for topic in topics:
         if topic != "/gnss/syncrho":
             print(topic)
-            dataframe_dict[topic] = get_dataframe(reader, topic, message_types[topic])
-            print(dataframe_dict[topic])
+            try:
+                dataframe_dict[topic] = get_dataframe(reader, topic, message_types[topic])
+                print(dataframe_dict[topic])
+            except:
+                # Remove that topic from the list
+                print(f"WARNING : {topic} has no messages")
+                topics.remove(topic)
+                continue
 
 # How to access header
 with AnyReader([Path(rosbag_dir)]) as reader:
@@ -165,4 +171,6 @@ with AnyReader([Path(rosbag_dir)]) as reader:
 
 
 print(dataframe_dict)
-d = dtale.show(dataframe_dict["/gnss/syncrho"], subprocess=False)
+# Merge all pandas dataframes into one column-wise
+dataframe = pd.concat(dataframe_dict, axis=1)
+d = dtale.show(dataframe, subprocess=False)
