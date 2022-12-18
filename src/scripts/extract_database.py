@@ -1,7 +1,6 @@
 """Example: Register types from msg files."""
 
 from pathlib import Path
-import dtale
 
 from rosbags.typesys import get_types_from_msg, register_types, generate_msgdef
 
@@ -10,9 +9,9 @@ from rosbags.typesys import get_types_from_msg, register_types, generate_msgdef
 add_types = {}
 
 for messages in [
-    ('/home/master/catkin_ws/src/gnss-sdr-ros/msg/GNSSSynchro.msg', "gnss_sdr2/msg/GNSSSynchro"),
-    ('/home/master/catkin_ws/src/gnss-sdr-ros/msg/Observables.msg', "gnss_sdr2/msg/Observables"),
-    ('/home/master/catkin_ws/src/gnss-sdr-ros/msg/MonitorPvt.msg', "gnss_sdr2/msg/MonitorPvt"),
+    ('/Users/zach-mcc/Documents/KTH/GNSS-Datalogger/src/gnss-sdr-ros/msg/GNSSSynchro.msg', "gnss_sdr2/msg/GNSSSynchro"),
+    ('/Users/zach-mcc/Documents/KTH/GNSS-Datalogger/src/gnss-sdr-ros/msg/Observables.msg', "gnss_sdr2/msg/Observables"),
+    ('/Users/zach-mcc/Documents/KTH/GNSS-Datalogger/src/gnss-sdr-ros/msg/MonitorPvt.msg', "gnss_sdr2/msg/MonitorPvt"),
 ]:
     pathstr = messages[0]
     msg_type = messages[1]
@@ -173,4 +172,7 @@ with AnyReader([Path(rosbag_dir)]) as reader:
 print(dataframe_dict)
 # Merge all pandas dataframes into one column-wise
 dataframe = pd.concat(dataframe_dict, axis=1)
-d = dtale.show(dataframe, subprocess=False)
+# Interpolate missing values
+dataframe = dataframe.interpolate(method='linear', axis=0).ffill().bfill()
+# Save to pickle
+dataframe.to_pickle(f"{rosbag_dir}/dataframe.pkl")
