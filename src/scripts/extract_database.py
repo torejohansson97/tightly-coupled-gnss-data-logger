@@ -1,22 +1,35 @@
 """Example: Register types from msg files."""
 
 from pathlib import Path
+import argparse
+from os import listdir, getcwd
+from os.path import isfile, join
 
 from rosbags.typesys import get_types_from_msg, register_types, generate_msgdef
+
+
+parser = argparse.ArgumentParser(description='Extract images from rosbag.')
+# input will be the folder containing the .db3 and metadata.yml file
+parser.add_argument('--input','-i',type=str, help='rosbag input location')
+parser.add_argument('--msg_path', '-m', type=str, help='path to root msg folder')
+args = parser.parse_args()
 
 
 
 add_types = {}
 
-for messages in [
-    ('/Users/zach-mcc/Documents/KTH/GNSS-Datalogger/src/gnss-sdr-ros/msg/GNSSSynchro.msg', "gnss_sdr2/msg/GNSSSynchro"),
-    ('/Users/zach-mcc/Documents/KTH/GNSS-Datalogger/src/gnss-sdr-ros/msg/Observables.msg', "gnss_sdr2/msg/Observables"),
-    ('/Users/zach-mcc/Documents/KTH/GNSS-Datalogger/src/gnss-sdr-ros/msg/MonitorPvt.msg', "gnss_sdr2/msg/MonitorPvt"),
-]:
-    pathstr = messages[0]
-    msg_type = messages[1]
-    msgpath = Path(pathstr)
-    msgdef = msgpath.read_text(encoding='utf-8')
+message_dir = Path(args.msg_path)
+# Get all .msg file in the msg directory using listdir
+msg_list = result = list(Path(message_dir).rglob("*.[mM][sS][gG]"))
+
+print(msg_list)
+
+for message_path in msg_list:
+    msgdef = message_path.read_text(encoding='utf-8')
+    # Extract msg type from file name and path (e.g. gnss_sdr2/msg/GNSSSynchro.msg)
+    path_parts = str(message_path).split("/")
+    msg_type = "/".join(path_parts[-3:]).removesuffix(".msg")
+    print(msg_type)
     add_types.update(get_types_from_msg(msgdef, msg_type))
 
 register_types(add_types)
@@ -25,9 +38,11 @@ register_types(add_types)
 # the classname is derived from the msgtype names above.
 
 # pylint: disable=no-name-in-module,wrong-import-position
-from rosbags.typesys.types import gnss_sdr2__msg__GNSSSynchro as GNSSSynchro  # type: ignore  # noqa
-from rosbags.typesys.types import gnss_sdr2__msg__Observables as Observables  # type: ignore  # noqa
-from rosbags.typesys.types import gnss_sdr2__msg__MonitorPvt as MonitorPvt  # type: ignore  # noqa
+# from rosbags.typesys.types import gnss_sdr2__msg__GNSSSynchro as GNSSSynchro  # type: ignore  # noqa
+# from rosbags.typesys.types import gnss_sdr2__msg__Observables as Observables  # type: ignore  # noqa
+# from rosbags.typesys.types import gnss_sdr2__msg__MonitorPvt as MonitorPvt  # type: ignore  # noqa
+
+from rosbags.typesys.types import *
 
 """Example: Read messages from rosbag."""
 
@@ -40,19 +55,13 @@ from rosbags.serde import deserialize_cdr
 import matplotlib.pyplot as plt
 import os
 import collections
-import argparse
 import pandas as pd
         
-parser = argparse.ArgumentParser(description='Extract images from rosbag.')
-# input will be the folder containing the .db3 and metadata.yml file
-parser.add_argument('--input','-i',type=str, help='rosbag input location')
 # run with python filename.py -i rosbag_dir/
 
 # READ CUSTOM MESSAGE WITH ROSBAG2
 # https://stackoverflow.com/questions/73420147/how-to-read-custom-message-type-using-ros2bag
 # https://ternaris.gitlab.io/rosbags/examples/register_types.html
-
-args = parser.parse_args()
 
 rosbag_dir = args.input
 
