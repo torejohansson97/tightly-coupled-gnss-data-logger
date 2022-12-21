@@ -1,2 +1,5 @@
 .python-version
 .vscode
+rosbags/
+.DS_Store
+.python-version
