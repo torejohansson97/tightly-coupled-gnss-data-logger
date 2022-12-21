@@ -1,7 +1,7 @@
 GNSS_TMUX_SESSION="the_eye_of_sauron"
 
 ROSBAG_FOLDER="/home/$(whoami)/rosbags"
-NOW="$(date +"%Y-%m-%d@%k:%M")"
+NOW="$(date +"%Y-%m-%d_%Hh%Mm")"
 ROSBAG_NAME="recording_$NOW"
 ROSBAG_PATH="$ROSBAG_FOLDER/$ROSBAG_NAME"
 
@@ -25,6 +25,7 @@ GNSS_SDR_SCRIPT_NAME="gnss_sdr_realtime.sh"
 while getopts 'vr' OPTION; do
   case "$OPTION" in
     v)
+      echo "USING VCAN0"
       CANBUS="vcan0"
       ;;
     r)
@@ -58,8 +59,9 @@ tmux new-window -t $GNSS_TMUX_SESSION:6 -n 'node-xsens-imu'
 tmux new-window -t $GNSS_TMUX_SESSION:7 -n 'node-berry-imu'
 tmux new-window -t $GNSS_TMUX_SESSION:8 -n 'node-canbus-1'
 tmux new-window -t $GNSS_TMUX_SESSION:9 -n 'node-canbus-2'
-tmux new-window -t $GNSS_TMUX_SESSION:10 -n 'rosbag'
-tmux new-window -t $GNSS_TMUX_SESSION:11 -n 'control'
+tmux new-window -t $GNSS_TMUX_SESSION:10 -n 'node-gpio'
+tmux new-window -t $GNSS_TMUX_SESSION:11 -n 'rosbag'
+tmux new-window -t $GNSS_TMUX_SESSION:12 -n 'control'
 
 # Start roscore in first pane
 # Select pane
@@ -81,8 +83,6 @@ sleep 1
 # Start gnss-sdr in third pane
 # Select pane
 tmux select-window -t $GNSS_TMUX_SESSION:2
-# Start playback (TODO: change to GNSS-SDR)
-# tmux send-keys "gnss-sdr --config_file=/home/odroid/gnss-sdr/config/gnss-sdr_playback.conf" C-m
 tmux send-keys "cd ~/gnss-sdr/work" C-m
 tmux send-keys "./$GNSS_SDR_SCRIPT_NAME" C-m
 
@@ -163,7 +163,7 @@ tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS bash $CANBUS_SETUP_PATH" C-m
 # Start node-canbus-2 in ninth pane (CANBUS LOGGING)
 # Select pane
 tmux select-window -t $GNSS_TMUX_SESSION:9
-# SSH into pi CANBUS using sshpass to pass password
+# SSH into obd-pi using sshpass to pass password
 tmux send-keys "sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME" C-m
 # Source ROS1_ws
 tmux send-keys "source ~/catkin_ws/devel/setup.bash" C-m
@@ -172,9 +172,25 @@ tmux send-keys "export ROS_MASTER_URI=http://$ROS_MASTER_IP:$ROS_MASTER_PORT/" C
 # Start node-canbus
 tmux send-keys "rosrun obd2bridge obd_decode_node.py $CANBUS" C-m
 
-# Start ros2 bag in tenth pane
+# Start node-gpio in tenth pane
 # Select pane
 tmux select-window -t $GNSS_TMUX_SESSION:10
+# SSH into obd-pi using sshpass to pass password
+tmux send-keys "sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME" C-m
+# Source ROS1_ws
+tmux send-keys "source ~/catkin_ws/devel/setup.bash" C-m
+# Export ROS_MASTER_URI
+tmux send-keys "export ROS_MASTER_URI=http://$ROS_MASTER_IP:$ROS_MASTER_PORT/" C-m
+# Kill pigpiod if it is already running
+tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS killall pigpiod" C-m
+# Run GPIO setup command
+tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS pigpiod" C-m
+# Start node-gpio
+tmux send-keys "rosrun gpio_control gpio_control_node --device pi --output 14" C-m
+
+# Start ros2 bag in eleventh pane
+# Select pane
+tmux select-window -t $GNSS_TMUX_SESSION:11
 # Source ROS2_ws
 tmux send-keys "source ~/ros2_ws/install/setup.bash" C-m
 # Start ros2 bag to record everything in folder ~/rosbags
@@ -183,7 +199,7 @@ tmux send-keys "ros2 bag record -a -o $ROSBAG_PATH" C-m
 
 # End of script ===============================================================
 # Set default window (control)
-tmux select-window -t $GNSS_TMUX_SESSION:11
+tmux select-window -t $GNSS_TMUX_SESSION:12
 # Attach to session
 tmux -2 attach-session -t $GNSS_TMUX_SESSION
 # =============================================================================
