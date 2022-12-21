@@ -173,4 +173,6 @@ with AnyReader([Path(rosbag_dir)]) as reader:
 print(dataframe_dict)
 # Merge all pandas dataframes into one column-wise
 dataframe = pd.concat(dataframe_dict, axis=1)
+# Interpolate missing values
+dataframe = dataframe.interpolate(method='linear', axis=0).ffill().bfill()
 d = dtale.show(dataframe, subprocess=False)
