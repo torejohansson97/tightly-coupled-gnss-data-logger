@@ -2,16 +2,18 @@
 
 from pathlib import Path
 import argparse
-from os import listdir, getcwd
-from os.path import isfile, join
+import pandas as pd
+import tkinter as tk
 
-from rosbags.typesys import get_types_from_msg, register_types, generate_msgdef
+
+from rosbags.typesys import get_types_from_msg, register_types
 
 
 parser = argparse.ArgumentParser(description='Extract images from rosbag.')
 # input will be the folder containing the .db3 and metadata.yml file
 parser.add_argument('--input','-i',type=str, help='rosbag input location')
 parser.add_argument('--msg_path', '-m', type=str, help='path to root msg folder')
+parser.add_argument('--output','-o',type=str, help='CSV output location')
 args = parser.parse_args()
 
 
@@ -46,16 +48,10 @@ from rosbags.typesys.types import *
 
 """Example: Read messages from rosbag."""
 
-from rosbags.rosbag2 import Reader as ROS2Reader
 from rosbags.dataframe import get_dataframe
 from rosbags.highlevel import AnyReader
-import sqlite3
 
 from rosbags.serde import deserialize_cdr
-import matplotlib.pyplot as plt
-import os
-import collections
-import pandas as pd
         
 # run with python filename.py -i rosbag_dir/
 
@@ -65,15 +61,9 @@ import pandas as pd
 
 rosbag_dir = args.input
 
-# topic = "/topic/name"
-frame_counter = 0
-
-
 def get_msg_keys(msg_type):
     print(type(msg_type))
 
-import re
-from time import sleep
 message_fields = []
 def dfs(msg, type_name, branch=0,prefix=""):
     """ Depth-first search of a message type. """
@@ -143,39 +133,178 @@ with AnyReader([Path(rosbag_dir)]) as reader:
         if len(message_types) == len(topics):
             break
 
-print(f"message_types : {message_types}")
-print(f"topics : {topics}")
+# Clean the message_types by removing any value from the list that contain a capital letter
+for topic in message_types:
+    message_types[topic] = [x for x in message_types[topic] if not any(c.isupper() for c in x)]
+
+
+class FieldItem():
+    def __init__(self, field_name, topic):
+        self.field_name = field_name
+        self.topic = topic
+
+    def __repr__(self):
+        return f"{self.field_name} : {self.topic}"
+
+    def __str__(self) -> str:
+        return f"{self.field_name}"
+
+class EntryWithPlaceholder(tk.Entry):
+    def __init__(self, master=None, placeholder="PLACEHOLDER", color='grey'):
+        super().__init__(master)
+
+        self.placeholder = placeholder
+        self.placeholder_color = color
+        self.default_fg_color = self['fg']
+
+        self.bind("<FocusIn>", self.foc_in)
+        self.bind("<FocusOut>", self.foc_out)
+
+        self.put_placeholder()
+
+    def put_placeholder(self):
+        self.insert(0, self.placeholder)
+        self['fg'] = self.placeholder_color
+
+    def foc_in(self, *args):
+        if self['fg'] == self.placeholder_color:
+            self.delete('0', 'end')
+            self['fg'] = self.default_fg_color
+
+    def foc_out(self, *args):
+        if not self.get():
+            self.put_placeholder()
+
+# merge all values from message_types into a single list with value that look like "key/value"
+fields = [FieldItem(f"{key}/{value}", key) for key in message_types for value in message_types[key]]
+fields = sorted(fields, key=lambda x: x.field_name)
+
+# Create a list for the selected fields (used later)
+selected_fields = []
+
+# Create the main window
+window = tk.Tk()
+window.title("Field Selector")
+window.geometry("1000x600")
+
+# Create the left frame with a list of fields
+left_frame = tk.Frame(window)
+left_frame.pack(side='left', fill='both', expand=True)
+scrollbar = tk.Scrollbar(left_frame)
+scrollbar.pack(side='right', fill='y')
+fields_list = tk.Listbox(left_frame, width=20, selectmode='extended', yscrollcommand=scrollbar.set)
+for field_item in fields:
+    fields_list.insert('end', field_item)
+
+print(fields_list.get(0, 'end'))
+fields_list.pack(side='left', fill='both', expand=True)
+scrollbar.config(command=fields_list.yview)
+
+# Create the right frame with a list of selected fields and a plus button
+right_frame = tk.Frame(window)
+right_frame.pack(side='right', fill='both', expand=True)
+selected_scrollbar = tk.Scrollbar(right_frame)
+selected_scrollbar.pack(side='right', fill='y')
+selected_fields_list = tk.Listbox(right_frame, width=20, selectmode='extended', yscrollcommand=selected_scrollbar.set)
+selected_fields_list.pack(side='left', fill='both', expand=True)
+selected_scrollbar.config(command=selected_fields_list.yview)
+
+# Button to add and remove fields
+add_button = tk.Button(right_frame, text='+', command=lambda: add_fields())
+add_button.pack()
+remove_button = tk.Button(right_frame, text='-', command=lambda: remove_topics())
+remove_button.pack()
+# Button to close the window
+close_button = tk.Button(right_frame, text='Extract fields', command=lambda: extract_fields())
+close_button.pack()
+
+def extract_fields():
+    global selected_fields
+    selected_fields = selected_fields_list.get(0, 'end')
+    selected_fields = [str(field) for field in selected_fields]
+    window.destroy()
+
+# Create the search bar and bind it to the search function
+search_frame = tk.Frame(window)
+search_bar = EntryWithPlaceholder(search_frame, placeholder="Search topics...")
+search_bar.pack()
+search_bar.bind('<KeyRelease>', lambda event: search())
+
+# Add a function to add the selected fields to the list of selected fields
+def add_fields():
+    selected_indices = fields_list.curselection()
+    for index in selected_indices:
+        selected_field = fields_list.get(index)
+        if selected_field not in selected_fields_list.get(0, 'end'):
+            selected_fields_list.insert('end', selected_field)
+
+# Add a function to remove the selected topics from the list of selected topics
+def remove_topics():
+    selected_indices = selected_fields_list.curselection()
+    for index in reversed(selected_indices):
+        selected_fields_list.delete(index)
+
+# Add a function to search the list of fields and filter the displayed items
+def search():
+    search_term = search_bar.get().lower()
+    fields_list.delete(0, 'end')
+    for field_item in fields:
+        if search_term in field_item.field_name.lower():
+            fields_list.insert('end', field_item)
+
+# Pack the frames and start the main loop
+left_frame.pack(side='left')
+right_frame.pack(side='right')
+search_frame.pack(side='top')
+window.mainloop()
+
+# Check if the list is empty
+if len(selected_fields) == 0:
+    print('No fields selected')
+    quit()
+# filter message_types to only contain the selected fields
+filtered_message_types = {}
+for field in fields:
+    if field.field_name in selected_fields:
+        if field.topic not in filtered_message_types:
+            filtered_message_types[field.topic] = []
+        filtered_message_types[field.topic].append(field.field_name.split('/')[-1])
+
+print(filtered_message_types)
 
 dataframe_dict = {}
 with AnyReader([Path(rosbag_dir)]) as reader:
-    for topic in topics:
+    for topic, fields in filtered_message_types.items():
         if topic != "/gnss/syncrho":
             print(topic)
             try:
-                dataframe_dict[topic] = get_dataframe(reader, topic, message_types[topic])
-                print(dataframe_dict[topic])
-            except:
+                for field in fields:
+                    dataframe_dict[str(topic) + "/" + str(field)] = get_dataframe(reader, topic, [field])
+                # print(dataframe_dict[topic])
+            except Exception as e:
+                print(e)
                 # Remove that topic from the list
                 print(f"WARNING : {topic} has no messages")
-                topics.remove(topic)
+                # topics.remove(topic)
                 continue
 
 # How to access header
-with AnyReader([Path(rosbag_dir)]) as reader:
-    dataframe_dict["/gnss/syncrho"] = get_dataframe(reader, '/gnss/syncrho', ['observable'])
+if "/gnss/syncrho" in filtered_message_types:
+    with AnyReader([Path(rosbag_dir)]) as reader:
+        dataframe_dict["/gnss/syncrho"] = get_dataframe(reader, '/gnss/syncrho', ['observable'])
 
-    # iterate though each row and add a column for each field in the message
-    for index, row in dataframe_dict["/gnss/syncrho"].iterrows():
-        for i in range(0,len(row['observable'])):
-            for field in message_types['/gnss/syncrho']:
-                if field != "observable":
-                    dataframe_dict["/gnss/syncrho"].at[index,f"observable.{i}.{field}"] = get_attribute(row['observable'][i], field)
+        # iterate though each row and add a column for each field in the message
+        for index, row in dataframe_dict["/gnss/syncrho"].iterrows():
+            for i in range(0,len(row['observable'])):
+                for field in filtered_message_types['/gnss/syncrho']:
+                    if field != "observable":
+                        dataframe_dict["/gnss/syncrho"].at[index,f"observable.{i}.{field}"] = get_attribute(row['observable'][i], field)
 
 
-    # unpack column into multiple columns
-    # dataframe = dataframe.explode('observable')
-    # dataframe = dataframe["observable"].apply(lambda x: pd.Series([get_attribute(x, field) for field in message_types['/gnss/syncrho'] if field != "observable"]))
-    print(dataframe_dict["/gnss/syncrho"]["observable.0.signal"])
+        # unpack column into multiple columns
+        # dataframe = dataframe.explode('observable')
+        # dataframe = dataframe["observable"].apply(lambda x: pd.Series([get_attribute(x, field) for field in message_types['/gnss/syncrho'] if field != "observable"]))
+        print(dataframe_dict["/gnss/syncrho"]["observable.0.signal"])
 
 
 print(dataframe_dict)
@@ -184,4 +313,7 @@ dataframe = pd.concat(dataframe_dict, axis=1)
 # Interpolate missing values
 dataframe = dataframe.interpolate(method='linear', axis=0).ffill().bfill()
 # Save to pickle
-dataframe.to_pickle(f"{rosbag_dir}/dataframe.pkl")
+if args.output:
+    dataframe.to_csv(args.output)
+else:
+    dataframe.to_csv(f"{rosbag_dir}/dataframe.csv")

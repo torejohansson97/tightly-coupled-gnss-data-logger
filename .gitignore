@@ -3,3 +3,7 @@
 rosbags/
 .DS_Store
 .python-version
+*.png
+*.jpg
+*.jpeg
+*.html
