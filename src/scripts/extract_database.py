@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description='Extract images from rosbag.')
 parser.add_argument('--input','-i',type=str, help='rosbag input location')
 parser.add_argument('--msg_path', '-m', type=str, help='path to root msg folder')
 parser.add_argument('--output','-o',type=str, help='CSV output location')
+parser.add_argument('--interpolate', '-n', action="store_true", help='interpolate missing values')
 args = parser.parse_args()
 
 
@@ -311,7 +312,8 @@ print(dataframe_dict)
 # Merge all pandas dataframes into one column-wise
 dataframe = pd.concat(dataframe_dict, axis=1)
 # Interpolate missing values
-dataframe = dataframe.interpolate(method='linear', axis=0).ffill().bfill()
+if args.interpolate:
+    dataframe = dataframe.interpolate(method='linear', axis=0).ffill().bfill()
 # Save to pickle
 if args.output:
     dataframe.to_csv(args.output)
