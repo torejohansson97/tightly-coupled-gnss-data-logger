@@ -303,7 +303,7 @@ with AnyReader([Path(rosbag_dir)]) as reader:
                     # Get dataframe for the list (strip the number from the field name)
                     list_field = str(field.split('.')[0])
                     list_index = int(field.split('.')[1])
-                    sub_field = str(field.split('.')[2])
+                    sub_field = str(".".join(field.split('.')[2:]))
                     dataframe_name = str(topic) + "/" + list_field
                     # Check if the dataframe has already been created
                     if dataframe_name not in dataframe_dict:
