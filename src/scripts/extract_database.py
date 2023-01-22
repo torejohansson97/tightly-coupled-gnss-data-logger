@@ -1,14 +1,15 @@
 """Example: Register types from msg files."""
 
-from pathlib import Path
-import argparse
-import pandas as pd
-import tkinter as tk
 import re
-
+import tkinter as tk
+import argparse
+from pathlib import Path
+import pandas as pd
 
 from rosbags.typesys import get_types_from_msg, register_types
-
+from rosbags.dataframe import get_dataframe
+from rosbags.highlevel import AnyReader
+from rosbags.serde import deserialize_cdr
 
 parser = argparse.ArgumentParser(description='Extract images from rosbag.')
 # input will be the folder containing the .db3 and metadata.yml file
@@ -17,8 +18,6 @@ parser.add_argument('--msg_path', '-m', type=str, help='path to root msg folder'
 parser.add_argument('--output','-o',type=str, help='CSV output location')
 parser.add_argument('--interpolate', '-n', action="store_true", help='interpolate missing values')
 args = parser.parse_args()
-
-
 
 add_types = {}
 
@@ -38,24 +37,10 @@ for message_path in msg_list:
 
 register_types(add_types)
 
-# Type import works only after the register_types call,
-# the classname is derived from the msgtype names above.
-
-# pylint: disable=no-name-in-module,wrong-import-position
-# from rosbags.typesys.types import gnss_sdr2__msg__GNSSSynchro as GNSSSynchro  # type: ignore  # noqa
-# from rosbags.typesys.types import gnss_sdr2__msg__Observables as Observables  # type: ignore  # noqa
-# from rosbags.typesys.types import gnss_sdr2__msg__MonitorPvt as MonitorPvt  # type: ignore  # noqa
-
+# We need to import the types we just registered and importing them without a wildcard is *a bit* tedious.
 from rosbags.typesys.types import *
-
-"""Example: Read messages from rosbag."""
-
-from rosbags.dataframe import get_dataframe
-from rosbags.highlevel import AnyReader
-
-from rosbags.serde import deserialize_cdr
         
-# run with python filename.py -i rosbag_dir/
+# run with 'python filename.py -i rosbag_dir/ --msg_path msg_dir/ -o output_dir/output_file.csv'
 
 # READ CUSTOM MESSAGE WITH ROSBAG2
 # https://stackoverflow.com/questions/73420147/how-to-read-custom-message-type-using-ros2bag
@@ -100,7 +85,6 @@ def get_attribute(obj, path_string):
         i += 1
 
 
-
 # Get topic names
 topics = []
 exclude_topics = ["/rosout", "/rosout_agg","/parameter_events"]
@@ -130,22 +114,6 @@ with AnyReader([Path(rosbag_dir)]) as reader:
             # Save those fields to message_types
             message_types[connection.topic] = message_fields
             message_fields=[]
-        # if connection.topic == "/gnss/syncrho" and connection.topic not in message_types:
-        #     msg = deserialize_cdr(rawdata, connection.msgtype)
-        #     dfs(msg.observable[0],"")
-        #     message_types[connection.topic] = message_fields
-        #     message_fields=[]
-        #     dfs(msg,"",prefix="")
-        #     message_types[connection.topic].extend(message_fields)
-        #     message_fields=[]
-        # # check if topic in message_types
-        # elif connection.topic not in message_types and connection.topic not in exlcude_topics:
-        #     msg = deserialize_cdr(rawdata, connection.msgtype)
-
-        #     dfs(msg,"")
-        #     message_types[connection.topic] = message_fields
-        #     message_fields=[]
-
 
         # check if len message_types is equal to len topics
         if len(message_types) == len(topics):
@@ -319,35 +287,13 @@ with AnyReader([Path(rosbag_dir)]) as reader:
                         things_to_remove.append((dataframe_name, list_field))
                 else:
                     dataframe_dict[str(topic) + "/" + str(field)] = get_dataframe(reader, topic, [field])
-            # print(dataframe_dict[topic])
         except Exception as e:
-            print(e)
-            # Remove that topic from the list
-            print(f"WARNING : {topic} has no messages")
-            # topics.remove(topic)
-            continue
+            print(f"WARNING : {topic} AS CREATED AN ERROR, IF THIS EVER PRINTS CONTACT THE DEVELOPER")
+            raise e
 
 # Remove the list fields from the dataframe
 for dataframe_name, list_field in things_to_remove:
     dataframe_dict[dataframe_name] = dataframe_dict[dataframe_name].drop(columns=[list_field])
-
-# # How to access header
-# if "/gnss/syncrho" in filtered_message_types:
-#     with AnyReader([Path(rosbag_dir)]) as reader:
-#         dataframe_dict["/gnss/syncrho"] = get_dataframe(reader, '/gnss/syncrho', ['observable'])
-
-#         # iterate though each row and add a column for each field in the message
-#         for index, row in dataframe_dict["/gnss/syncrho"].iterrows():
-#             for i in range(0,len(row['observable'])):
-#                 for field in filtered_message_types['/gnss/syncrho']:
-#                     if field != "observable":
-#                         dataframe_dict["/gnss/syncrho"].at[index,f"observable.{i}.{field}"] = get_attribute(row['observable'][i], field)
-
-
-        # unpack column into multiple columns
-        # dataframe = dataframe.explode('observable')
-        # dataframe = dataframe["observable"].apply(lambda x: pd.Series([get_attribute(x, field) for field in message_types['/gnss/syncrho'] if field != "observable"]))
-
 
 print(dataframe_dict)
 # Merge all pandas dataframes into one column-wise
