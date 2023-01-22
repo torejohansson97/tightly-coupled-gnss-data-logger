@@ -4,6 +4,7 @@ from pathlib import Path
 import argparse
 import pandas as pd
 import tkinter as tk
+import re
 
 
 from rosbags.typesys import get_types_from_msg, register_types
@@ -102,32 +103,48 @@ def get_attribute(obj, path_string):
 
 # Get topic names
 topics = []
-exlcude_topics = ["/rosout", "/rosout_agg","/parameter_events"]
+exclude_topics = ["/rosout", "/rosout_agg","/parameter_events"]
 message_types = {}
 with AnyReader([Path(rosbag_dir)]) as reader:
     for connection in reader.connections:
         print(f"TOPIC : {connection.topic:30} \t MSG_TYPE : {connection.msgtype}")
-        if connection.topic not in exlcude_topics:
+        if connection.topic not in exclude_topics:
             topics.append(connection.topic)
         
     # iterate over messages
     for connection, timestamp, rawdata in reader.messages():
-
-        if connection.topic == "/gnss/syncrho" and connection.topic not in message_types:
+        # Check if message type as already been seen and dealt with
+        if connection.topic not in message_types and connection.topic not in exclude_topics:
+            # Check all fields of object and check if they are lists or not
+            # if so, run dfs on them
             msg = deserialize_cdr(rawdata, connection.msgtype)
-            dfs(msg.observable[0],"")
-            message_types[connection.topic] = message_fields
-            message_fields=[]
+            # Grab all fields of the message
             dfs(msg,"",prefix="")
-            message_types[connection.topic].extend(message_fields)
-            message_fields=[]
-        # check if topic in message_types
-        elif connection.topic not in message_types and connection.topic not in exlcude_topics:
-            msg = deserialize_cdr(rawdata, connection.msgtype)
-
-            dfs(msg,"")
+            # Check for lists
+            for field in message_fields.copy():
+                if isinstance(get_attribute(msg,field), list):
+                    for i in range(len(get_attribute(msg,field))):
+                        dfs(get_attribute(msg,field)[i],f"{field}.{i}",prefix="")
+                    # Remove the field from message_fields
+                    message_fields.remove(field)
+            # Save those fields to message_types
             message_types[connection.topic] = message_fields
             message_fields=[]
+        # if connection.topic == "/gnss/syncrho" and connection.topic not in message_types:
+        #     msg = deserialize_cdr(rawdata, connection.msgtype)
+        #     dfs(msg.observable[0],"")
+        #     message_types[connection.topic] = message_fields
+        #     message_fields=[]
+        #     dfs(msg,"",prefix="")
+        #     message_types[connection.topic].extend(message_fields)
+        #     message_fields=[]
+        # # check if topic in message_types
+        # elif connection.topic not in message_types and connection.topic not in exlcude_topics:
+        #     msg = deserialize_cdr(rawdata, connection.msgtype)
+
+        #     dfs(msg,"")
+        #     message_types[connection.topic] = message_fields
+        #     message_fields=[]
 
 
         # check if len message_types is equal to len topics
@@ -274,38 +291,62 @@ for field in fields:
 print(filtered_message_types)
 
 dataframe_dict = {}
+things_to_remove = []
 with AnyReader([Path(rosbag_dir)]) as reader:
     for topic, fields in filtered_message_types.items():
-        if topic != "/gnss/syncrho":
-            print(topic)
-            try:
-                for field in fields:
+        print(topic)
+        try:
+            for field in fields:
+                # This detects string of the form "text.NUMBER.text"
+                if re.findall(r".*\.\d*\..*", field):
+                    # We are dealing with a list of objects
+                    # Get dataframe for the list (strip the number from the field name)
+                    list_field = str(field.split('.')[0])
+                    list_index = int(field.split('.')[1])
+                    sub_field = str(field.split('.')[2])
+                    dataframe_name = str(topic) + "/" + list_field
+                    # Check if the dataframe has already been created
+                    if dataframe_name not in dataframe_dict:
+                        # Create the dataframe (avoids overwriting the dataframe if multiple fields are in the same list)
+                        dataframe_dict[dataframe_name] = get_dataframe(reader, topic, [list_field])
+                    # iterate though each row and add a column for each field in the message
+                    for index, row in dataframe_dict[dataframe_name].iterrows():
+                        for i in range(0,len(row[list_field])):
+                            if i == list_index:
+                                dataframe_dict[dataframe_name].at[index,f"{list_field}.{i}.{sub_field}"] = get_attribute(row[list_field][i], sub_field)
+                    # Save the name of the field that contains the list to remove it from the dataframe after the iteration
+                    if (dataframe_name, list_field) not in things_to_remove:
+                        things_to_remove.append((dataframe_name, list_field))
+                else:
                     dataframe_dict[str(topic) + "/" + str(field)] = get_dataframe(reader, topic, [field])
-                # print(dataframe_dict[topic])
-            except Exception as e:
-                print(e)
-                # Remove that topic from the list
-                print(f"WARNING : {topic} has no messages")
-                # topics.remove(topic)
-                continue
+            # print(dataframe_dict[topic])
+        except Exception as e:
+            print(e)
+            # Remove that topic from the list
+            print(f"WARNING : {topic} has no messages")
+            # topics.remove(topic)
+            continue
 
-# How to access header
-if "/gnss/syncrho" in filtered_message_types:
-    with AnyReader([Path(rosbag_dir)]) as reader:
-        dataframe_dict["/gnss/syncrho"] = get_dataframe(reader, '/gnss/syncrho', ['observable'])
+# Remove the list fields from the dataframe
+for dataframe_name, list_field in things_to_remove:
+    dataframe_dict[dataframe_name] = dataframe_dict[dataframe_name].drop(columns=[list_field])
 
-        # iterate though each row and add a column for each field in the message
-        for index, row in dataframe_dict["/gnss/syncrho"].iterrows():
-            for i in range(0,len(row['observable'])):
-                for field in filtered_message_types['/gnss/syncrho']:
-                    if field != "observable":
-                        dataframe_dict["/gnss/syncrho"].at[index,f"observable.{i}.{field}"] = get_attribute(row['observable'][i], field)
+# # How to access header
+# if "/gnss/syncrho" in filtered_message_types:
+#     with AnyReader([Path(rosbag_dir)]) as reader:
+#         dataframe_dict["/gnss/syncrho"] = get_dataframe(reader, '/gnss/syncrho', ['observable'])
+
+#         # iterate though each row and add a column for each field in the message
+#         for index, row in dataframe_dict["/gnss/syncrho"].iterrows():
+#             for i in range(0,len(row['observable'])):
+#                 for field in filtered_message_types['/gnss/syncrho']:
+#                     if field != "observable":
+#                         dataframe_dict["/gnss/syncrho"].at[index,f"observable.{i}.{field}"] = get_attribute(row['observable'][i], field)
 
 
         # unpack column into multiple columns
         # dataframe = dataframe.explode('observable')
         # dataframe = dataframe["observable"].apply(lambda x: pd.Series([get_attribute(x, field) for field in message_types['/gnss/syncrho'] if field != "observable"]))
-        print(dataframe_dict["/gnss/syncrho"]["observable.0.signal"])
 
 
 print(dataframe_dict)
