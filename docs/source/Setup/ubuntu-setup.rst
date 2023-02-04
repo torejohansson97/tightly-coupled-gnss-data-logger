@@ -9,7 +9,7 @@ Ubuntu Setup
 Ubuntu on Raspberry PI
 ---------
 
-The installation guide for ubuntu can be found here `https://ubuntu.com/download/raspberry-pi`_
+The installation guide for ubuntu can be found here `ubuntu.com <https://ubuntu.com/download/raspberry-pi>`_
 After installing ubuntu it needs some configuration such as configuring IP address and peripheral specific options, which is covered in the subsequent sections.
 
 PICAN3 Configuration
