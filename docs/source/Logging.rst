@@ -10,5 +10,6 @@ Simple example
    :hidden:
    :glob:
 
-   Logging/test
+   Logging/Log
+   Logging/Extract-Data
    Setup/chrony
