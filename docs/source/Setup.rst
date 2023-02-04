@@ -2,7 +2,7 @@
 
 
 Setup and Installation guide
-==================
+============================
 
 .. toctree::
    :hidden:

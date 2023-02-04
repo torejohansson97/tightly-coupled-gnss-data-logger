@@ -8,3 +8,4 @@ rosbags/
 *.jpeg
 *.html
 *~
+build

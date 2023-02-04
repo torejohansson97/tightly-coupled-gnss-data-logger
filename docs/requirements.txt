@@ -1,2 +1,5 @@
 pip
+Sphinx
 sphinx-copybutton
+sphinx_rtd_theme
+sphinxcontrib-images
