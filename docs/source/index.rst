@@ -1,4 +1,4 @@
-Toughly Coupled GNSS Data Logger
+Tightly Coupled GNSS Data Logger
 ===================================
 
 .. note::
@@ -11,6 +11,7 @@ Toughly Coupled GNSS Data Logger
    :hidden:
 
    Setup
+   Usage
 
 Getting started
 ---------------
@@ -18,3 +19,6 @@ Getting started
 * :doc:`Setup and Installation <Setup>`
 
   - Instructions for setuping up and configuring the GNSS data logger for the first time
+
+* :doc:`Usage <Usage>`
+  - Instructions for using the GNSS data logger

@@ -12,6 +12,7 @@ Setup and Installation guide
    Setup/chrony
    Setup/gnss-sdr
    Setup/ros-foxy
+   Setup/ubuntu-setup
 
 
 Instructions for setuping up and configuring the GNSS data logger for the first time. The orignal hardware setup is described by the table below

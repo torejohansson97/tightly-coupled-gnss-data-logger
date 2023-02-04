@@ -2,7 +2,7 @@ GNSS-SDR with LimeSDR
 ===============
 
 .. contents:: Table of Contents
-   :depth: 2
+   :depth: 1
    :local:
 
 .. note::

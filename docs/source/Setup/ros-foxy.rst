@@ -2,7 +2,7 @@ ROS Foxy Installation
 ===============
 
 .. contents:: Table of Contents
-   :depth: 2
+   :depth: 1
    :local:
 
 This document explains how to install ROS Foxy on your system. Keep in mind that ROS Foxy is a distribution of ROS2 where the previously installed ROS Noetic 
