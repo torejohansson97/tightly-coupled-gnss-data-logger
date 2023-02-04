@@ -15,7 +15,7 @@ Where NAME_OF_RECORDING is the folder enclosing the database file (not the .db3 
 
 The script opens up a GUI like this:
 
-.. image:: ../../../images/field_extractor_tool.png
+.. image:: ../../images/field_extractor_tool.png
     :width: 600px
     :align: center
     :alt: Field Extractor Tool
@@ -32,7 +32,7 @@ The tool allows the user to selct the field they wish to extract from the databa
 
 5. The CSV file will be saved to the selected folder.
 
-.. thumbnail:: ../../../images/field_extractor_tool_instruction.png
+.. thumbnail:: ../../images/field_extractor_tool_instruction.png
     :group: field_extractor_tool
     :width: 600px
     :align: center
