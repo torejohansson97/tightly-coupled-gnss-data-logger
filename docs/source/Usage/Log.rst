@@ -2,8 +2,7 @@ Log
 ===============
 
 .. contents:: Table of Contents
-   :depth: 2
-   :local:
+   :depth: 1
 
 The following list of commands are all aliases located in the ~/.bashrc file. They are all used to start a logging session.
 

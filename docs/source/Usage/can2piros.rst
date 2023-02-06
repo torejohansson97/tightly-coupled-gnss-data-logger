@@ -3,7 +3,6 @@ can2piros
 
 .. contents:: Table of Contents
    :depth: 1
-   :local:
 
 Initial Setup
 --------

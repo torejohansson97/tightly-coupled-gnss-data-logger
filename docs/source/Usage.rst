@@ -2,13 +2,14 @@
 
 
 Usage guide
-==================
+==============
 
 .. toctree::
    :hidden:
    :glob:
 
    Usage/can2piros
+   Usage/Log
+   Usage/Extract-Data
 
-
-An informative guide for how to use the project
+An informative guide for how to use the various parts of the project.
