@@ -21,19 +21,19 @@ Run the following command to start collecting data from the can2piros package
 .. code-block:: bash
 		
    ./can_setup.sh
-   rosrun can2piros decode_node can0
+   rosrun obd2bridge obd_decode_node.py can0
 
 Alternatively one can use the virtual can port for simulation. To simulate input, first in one terminal start the fake_car_node by running the command
 
 .. code-block:: bash
 
    ./vcan_setup.sh
-   rosrun can2piros fake_car_node
+   rosrun obd2bridge fake_car_node.py
 
 Now that the "car" is running you can start the decoder
 
 .. code-block:: bash
 
-   rosrun can2piros decode_node vcan0
+   rosrun obd2bridge obd_decode_node.py vcan0
 
 
