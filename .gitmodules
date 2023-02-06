@@ -4,3 +4,6 @@
 [submodule "src/ublox"]
 	path = src/ublox
 	url = https://github.com/matthew-william-lock/ublox
+[submodule "src/tightly-coupled-gnss-data-logger_BerryIMU"]
+	path = src/tightly-coupled-gnss-data-logger_BerryIMU
+	url = git@github.com:torejohansson97/tightly-coupled-gnss-data-logger_BerryIMU.git
