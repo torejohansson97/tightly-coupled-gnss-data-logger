@@ -9,6 +9,8 @@ Usage guide
    :glob:
 
    Usage/can2piros
+   Usage/Log
+   Usage/Extract-Data
 
 
 An informative guide for how to use the project

@@ -9,7 +9,7 @@ The script can be run as follows:
 
 .. code-block:: bash
     
-    python extract_database.py --input ~/rosbag/NAME_OF_RECORDING --msg_path ~/tightly-coupled-datalogger/src/scripts/messages -o OUTPUT_PATH.csv
+    extract-database -i NAME_OF_RECORDING -o OUTPUT_FILE
 
 Where NAME_OF_RECORDING is the folder enclosing the database file (not the .db3 file itself).
 
