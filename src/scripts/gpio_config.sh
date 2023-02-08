@@ -14,12 +14,12 @@ while getopts 'so:' OPTION; do
     case "$OPTION" in
         s)
             echo "Logging into the obd-pi..."
-            tmux send-keys "sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME" C-m
+            tmux send-keys "STATE=$(sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME 'gpio -g read 14')" C-m
             echo "Getting the GPIO state..."
             # Get the state from the file using the BCM numbering
-            tmux send-keys "STATE=$(gpio -g read 14)" C-m
+            #tmux send-keys "STATE=\$(gpio -g read 14)" C-m
             # Get the STATE variable from the tmux environment variables back into our shell
-            STATE=$(tmux show-environment -g | grep STATE | cut -d '=' -f 2)
+            #STATE=$(tmux show-environment -g | grep STATE | cut -d '=' -f 2)
             # Print the state
             echo "The state of the GPIO is $STATE"
             exit

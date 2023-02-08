@@ -200,6 +200,7 @@ tmux send-keys "ros2 bag record -a -o $ROSBAG_PATH" C-m
 # End of script ===============================================================
 # Set default window (control)
 tmux select-window -t $GNSS_TMUX_SESSION:12
+tmux send-keys "source ~/ros2_ws/install/setup.bash" C-m
 # Attach to session
 tmux -2 attach-session -t $GNSS_TMUX_SESSION
 # =============================================================================
