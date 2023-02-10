@@ -1,37 +1,19 @@
-GPIO_SETTER="gpio-setter"
+#!/bin/bash
 
 CANBUS_USER="nss"
 CANBUS_HOSTNAME="obd-pi"
 CANBUS_PASSWORD="123456"
 
-# Needed if we use ROS messages
-# source ~/catkin_ws/devel/setup.bash
-
-tmux -2 new-session -d -s $GPIO_SETTER -n 'sneaky-gpio-setter'
-tmux select-window -t $GPIO_SETTER:0
 # Get flags
 while getopts 'so:' OPTION; do
     case "$OPTION" in
         s)
-            echo "Logging into the obd-pi..."
-            tmux send-keys "STATE=$(sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME 'gpio -g read 14')" C-m
-            echo "Getting the GPIO state..."
-            # Get the state from the file using the BCM numbering
-            #tmux send-keys "STATE=\$(gpio -g read 14)" C-m
-            # Get the STATE variable from the tmux environment variables back into our shell
-            #STATE=$(tmux show-environment -g | grep STATE | cut -d '=' -f 2)
-            # Print the state
+            echo "Logging into the obd-pi and getting the GPIO state..."
+            STATE=$(sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME 'gpio -g read 14')
             echo "The state of the GPIO is $STATE"
             exit
         ;;
         o)
-            echo "Logging into the obd-pi..."
-            tmux send-keys "sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME"
-            # Export the GPIO using the BCM numbering (no -g for the export command, it's enabled by default)
-            echo "Exporting the GPIOs..."
-            tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS gpio export 14 out" C-m
-            tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS gpio export 22 out" C-m
-
             # Get the state from the flag
             STATE="$OPTARG"
             # Check if STATE is 1 or true
@@ -43,13 +25,21 @@ while getopts 'so:' OPTION; do
                 STATE="0"
             fi
 
-            tmux send-keys "echo 'Setting the GPIO to $STATE'" C-m
-            # Set the state of the GPIO
-            tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS gpio -g write 14 $STATE" C-m
-            # Confirmation red LED
-            tmux send-keys "echo '$CANBUS_PASSWORD' | sudo -kS gpio -g write 22 $STATE" C-m
-            # This is the ROS command to set the state of the GPIO
-            # rostopic pub -1 /gpio_outputs/fourteen gpio_control/OutputState "state: $STATE"
+            echo "Logging into the obd-pi and setting pin state..."
+
+            OUTPUT=$(sshpass -p $CANBUS_PASSWORD ssh $CANBUS_USER@$CANBUS_HOSTNAME "
+            echo 'Exporting the GPIOs...'
+            # Export the GPIO using the BCM numbering (no -g for the export command, it's enabled by default)
+            # Attacker switch (BCM 14)
+            echo $CANBUS_PASSWORD | sudo -kS gpio export 14 out
+            # Confirmation red LED (BCM 22)
+            echo $CANBUS_PASSWORD | sudo -kS gpio export 22 out
+            echo 'Setting the GPIOs to $STATE...'
+            # IMPORTANT: DO NOT CALL WITH -g FLAG SUDO OR IT WILL NOT WORK
+            gpio -g write 14 $STATE
+            gpio -g write 22 $STATE")
+
+            echo -e "\n\nThe output of the command was: \n$OUTPUT"
             exit
         ;;
         ?)
