@@ -22,3 +22,15 @@ The -r flag will start a logging session wtih a replay file for the GNSS-SDR mod
    stop-logging
 
 Stop a logging session.
+
+.. code-block:: bash
+
+   set-attacker off
+
+Turn off the attacker.
+
+.. code-block:: bash
+
+   set-attacker on
+
+Turn on the attacker.
