@@ -9,6 +9,7 @@ Usage guide
    :glob:
 
    Usage/can2piros
+   Usage/Inertial-platform
    Usage/Log
    Usage/Extract-Data
 
