@@ -1,0 +1,21 @@
+# ROS ETHERNET CONFIG
+ROS_MASTER_URI=http://192.168.0.1:11311
+ROS_IP=192.168.0.1
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init -)"
+fi
+eval "$(pyenv virtualenv-init -)"
+
+# LIST OF ALIAS FOR DATALOGGER
+alias start-recording='bash /home/master/tightly-coupled-gnss-data-logger/src/scripts/log_gnss_sdr.sh'
+alias stop-recording='bash /home/master/tightly-coupled-gnss-data-logger/src/scripts/stop_recording.sh'
+alias attacker-on='bash /home/master/tightly-coupled-gnss-data-logger/src/scripts/gpio_config.sh -o 1'
+alias attacker-off='bash /home/master/tightly-coupled-gnss-data-logger/src/scripts/gpio_config.sh -o 0'
+alias attacker-state='bash /home/master/tightly-coupled-gnss-data-logger/src/scripts/gpio_config.sh -s'
+alias extract-database='bash /home/master/tightly-coupled-gnss-data-logger/src/scripts/extract_database.sh'
+
+# Add usr/local/bin to the PATH to make extraction script executable from anywhere
+export PATH="/usr/local/bin:$PATH"
