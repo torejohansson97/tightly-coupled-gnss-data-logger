@@ -10,7 +10,7 @@ The following list of commands are all aliases located in the ~/.bashrc file. Th
    :class: warning
 
    In order for any of the above commands to work, the .bashrc file must be sourced and edited to include the correct paths to the logging scripts.
-   You can find an example of the .bashrc file in the `scripts`_ folder under the name of `add_bashrc`.
+   You can find an example of the .bashrc over `here </src/scripts/add_bashrc>`_.
 
 Start/Stop a logging session
 ----------------------------
