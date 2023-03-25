@@ -10,8 +10,8 @@ Usage guide
 
    Usage/can2piros
    Usage/Inertial-platform
-   Usage/Log
+   Usage/Logging
    Usage/Extract-Data
 
 
-An informative guide for how to use the project
+An step by step guide to use the final datalogging system.

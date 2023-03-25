@@ -1,13 +1,13 @@
-Log
+Logging
 ===============
 
 .. contents:: Table of Contents
    :depth: 1
 
-The following list of commands are all aliases located in the ~/.bashrc file. They are all used to start a logging session.
+The following list of commands are all aliases located in the ~/.bashrc file. They are used to start and stop logging sessions.
 
-Start a logging session
------------------------
+Start/Stop a logging session
+----------------------------
 
 .. code-block:: bash
 
@@ -21,7 +21,9 @@ The -r flag will start a logging session wtih a replay file for the GNSS-SDR mod
 
    stop-logging
 
-Stop a logging session.
+
+Set the attacker on/off
+-----------------------
 
 .. code-block:: bash
 
