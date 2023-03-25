@@ -10,7 +10,7 @@ The following list of commands are all aliases located in the ~/.bashrc file. Th
    :class: warning
 
    In order for any of the above commands to work, the .bashrc file must be sourced and edited to include the correct paths to the logging scripts.
-   You can find an example of the .bashrc over `here </src/scripts/add_bashrc>`_.
+   You can find an example of the .bashrc over `here <https://github.com/torejohansson97/tightly-coupled-gnss-data-logger/blob/main/src/scripts/add_bashrc>`_.
 
 Start/Stop a logging session
 ----------------------------

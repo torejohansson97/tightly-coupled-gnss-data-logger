@@ -9,7 +9,7 @@ ROS Noetic Installation
 Installation
 -------------
 
-To install ROS Noetic, we recommend you follow the instructions on the official `ROS wiki http://wiki.ros.org/noetic/Installation/Ubuntu>`_. 
+To install ROS Noetic, we recommend you follow the instructions on the official `ROS wiki <http://wiki.ros.org/noetic/Installation/Ubuntu>`_. 
 
 .. warning::
 

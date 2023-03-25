@@ -15,7 +15,7 @@ to use the updated ROS2 logging system.
 Installation
 -------------
 
-To install ROS Foxy, we recommend you follow the instructions on the official `documentation https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html>`_.
+To install ROS Foxy, we recommend you follow the instructions on the official `documentation <https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html>`_.
 
 We recommend you install the full desktop version of ROS Foxy using :
 
